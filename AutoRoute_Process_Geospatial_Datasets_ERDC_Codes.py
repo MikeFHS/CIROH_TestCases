@@ -1,12 +1,21 @@
+#Simple Script to process Geospatial data for an AutoRoute / FloodSpreader model simulation.
+#Written on 5/22/2024 by Mike Follum, Follum Hydrologic Solutions, LLC.
 
 import sys
 import os
-
-import gdal
-
 import numpy as np
 import netCDF4   #conda install netCDF4
 
+try:
+    import gdal 
+    #import osr 
+    #import ogr
+    #from gdalconst import GA_ReadOnly
+except: 
+    from osgeo import gdal
+    #from osgeo import osr
+    #from osgeo import ogr
+    #from osgeo.gdalconst import GA_ReadOnly
 
 def Process_AutoRoute_Geospatial_Data():
     
