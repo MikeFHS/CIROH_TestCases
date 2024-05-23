@@ -1,6 +1,8 @@
 #Simple Script to process Geospatial data for an AutoRoute / FloodSpreader model simulation.
 #Written on 5/22/2024 by Mike Follum, Follum Hydrologic Solutions, LLC.
 
+#conda env create -f environment.yml
+
 import sys
 import os
 import numpy as np
@@ -21,23 +23,24 @@ def Process_AutoRoute_Geospatial_Data():
     
     #Input Dataset
     Main_Directory = ''
+    AR_Folder = 'AutoRoute_InputFiles'
+    AR_FileName = os.path.join(AR_Folder, 'Gardiner_AR_Input_File.txt')
     DEM_File = 'DEM/Gardiner_DEM.tif'
     LandCoverFile = 'LandCover/NLCD_2011_EPSG4269.tif'
     StrmSHP = 'StrmShp/Gardiner_GeoGLoWS_StreamShapefile.shp'
     FlowNC = 'FlowData/returnperiods_714.nc'
     
     #Datasets to be Created
-    STRM_File = 'STRM/STRM_Raster.tif'
+    STRM_File = 'STRM/Gardiner_STRM_Raster.tif'
     STRM_File_Clean = STRM_File.replace('.tif','_Clean.tif')
-    LAND_File = 'LAND/LAND_Raster.tif'
-    FLOW_File = 'FLOW/FlowFile.txt'
+    LAND_File = 'LAND/Gardiner_LAND_Raster.tif'
+    FLOW_File = 'FLOW/Gardiner_FlowFile.txt'
     FlowFileFolder = 'FlowFile'
     FloodFolder = 'FloodMap'
-    AR_Folder = 'AutoRoute_InputFiles'
     ManningN = 'LAND/AR_Manning_n_for_NLCD_MED.txt'
-    VDT_File = 'VDT/VDT.txt'
-    FloodMapFile = FloodFolder + '/' + 'Flood.tif'
-    DepthMapFile = FloodFolder + '/' + 'Depth.tif'
+    VDT_File = 'VDT/Gardiner_VDT.csv'
+    FloodMapFile = FloodFolder + '/' + 'Gardiner_Flood.tif'
+    DepthMapFile = FloodFolder + '/' + 'Gardiner_Depth.tif'
     
     #Create Folders
     Create_Folder('STRM')
@@ -127,7 +130,6 @@ def Process_AutoRoute_Geospatial_Data():
     Create_BaseLine_Manning_n_File(ManningN)
     
     #Create a Starting AutoRoute Input File
-    AR_FileName = os.path.join(AR_Folder,'AR_Input_File.txt')
     print('Creating AutoRoute Input File: ' + AR_FileName)
     COMID_Q_File = FlowFileFolder + '/' + 'COMID_Q_qout_max.txt'
     Create_AutoRoute_Model_Input_File(Main_Directory, AR_FileName, DEM_File, COMID_Q_File, 'COMID', 'qout_max', STRM_File_Clean, LAND_File, FLOW_File, VDT_File, ManningN, FloodMapFile, DepthMapFile)
@@ -135,11 +137,11 @@ def Process_AutoRoute_Geospatial_Data():
     
     print('\n\n')
     print('Next Step is to Run AutoRoute by copying the following into the Command Prompt:')
-    print('autoroute.exe ' + Main_Directory + AR_Folder + '/' + 'AR_Input_File.txt')
+    print('autoroute.exe ' + Main_Directory + AR_FileName)
     
     print('\n')
     print('Then Run FloodSpreader by copying the following into the Command Prompt:')
-    print('floodspreader.exe ' + Main_Directory + AR_Folder + '/' + 'AR_Input_File.txt')
+    print('floodspreader.exe ' + Main_Directory + AR_FileName)
     
     return
 
