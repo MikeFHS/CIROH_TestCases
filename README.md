@@ -16,6 +16,8 @@ FloodSpreader uses the information from AutoRoute to create a flood inundation m
     Land Cover data is from the National Land Cover Database 2011 - https://www.mrlc.gov/data/nlcd-2011-land-cover-conus
     Streamlines are from GeoGLoWS - http://geoglows-v2.s3-website-us-west-2.amazonaws.com/#streams/
     Return period flow data is from GeoGLoWS - http://geoglows-v2-retrospective.s3-website-us-west-2.amazonaws.com/#return-periods/
+    FEMA S_FLD_HAZ_AR shapefile is only provided for context.
+        The file (from 30067C_20221116) was obtained from https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html
 
 # Model/Data/Files are AS-IS with No Warranty:
 Any scripts, files, etc. provided in this document are for testing purposes only and are provided "as is" and without any warranty of any kind.
